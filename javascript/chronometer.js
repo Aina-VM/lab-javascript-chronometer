@@ -1,7 +1,9 @@
 class Chronometer {
   constructor() {
-    let currentTime = 0;
-    let intervalId = null;
+    this.currentTime = 0;
+    this.intervalId = null;
+  }
+
   start(callback) {
     if (callback) {
       callback();
@@ -12,14 +14,20 @@ class Chronometer {
     intervalId = setInterval();
     }
   }
-  }
+  
 
   getMinutes() {
+    if (this.currentTime === 0) {
+      return 0;
+    }
     let minutes = Math.floor(currentTime / 60);
     return minutes;
   }
 
   getSeconds() {
+    if (this.currentTime === 0) {
+      return 0;
+    }
     let seconds = currentTime % 60;
     return seconds;
   }
@@ -31,7 +39,7 @@ class Chronometer {
   }
 
   stop() {
-    clearInterval(intervalId);
+    clearInterval(intervalId); //    should stop a previously started chronometer ?
   }
 
   reset() {
