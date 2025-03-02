@@ -5,14 +5,11 @@ class Chronometer {
   }
 
   start(callback) {
-    if (callback) {
-      callback();
-    } else {
-    intervalId = setInterval(() => {
-      return currentTime++;
+    if (callback) callback();
+    this.intervalId = setInterval(() => {
+      return this.currentTime++;
     }, 1000);
-    intervalId = setInterval();
-    }
+    this.intervalId = setInterval();
   }
   
 
@@ -20,38 +17,35 @@ class Chronometer {
     if (this.currentTime === 0) {
       return 0;
     }
-    let minutes = Math.floor(currentTime / 60);
-    return minutes;
+    return Math.floor(this.currentTime / 60);
   }
 
   getSeconds() {
     if (this.currentTime === 0) {
       return 0;
     }
-    let seconds = currentTime % 60;
-    return seconds;
+    return this.currentTime % 60;
   }
 
   computeTwoDigitNumber(value) {
     zeroDigits = `0${value}`;
-    twoDigits = zeroDigits.slice(-2);
-    return twoDigits;
+    return zeroDigits.slice(-2);
   }
 
   stop() {
-    clearInterval(intervalId); //    should stop a previously started chronometer ?
+    clearInterval(this.intervalId);
+    this.intervalId = null;
   }
 
   reset() {
-    currentTime = 0;
+    this.currentTime = 0;
     document.getElementsByClassName('numbers').innerHTML = '00:00';
   }
 
   split() {
     let minutes = this.computeTwoDigitNumber(this.getMinutes());
     let seconds = this.computeTwoDigitNumber(this.getSeconds());
-    let splitTime = `${minutes}:${seconds}`;
-    return splitTime;
+    return `${minutes}:${seconds}`;
   }
 }
 
@@ -60,3 +54,5 @@ class Chronometer {
 if (typeof module !== 'undefined') {
   module.exports = Chronometer;
 }
+
+
