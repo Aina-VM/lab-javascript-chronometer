@@ -36,7 +36,11 @@ function printSeconds() {
 
 // ==> BONUS
 function printMilliseconds() {
-  
+  let milliseconds = chronometer.getMilliseconds();
+  let millisecondsString = chronometer.computeTwoDigitNumber(milliseconds);
+  milDecElement.innerHTML = millisecondsString[0];
+  milUniElement.innerHTML = millisecondsString[1];
+  return millisecondsString;
 }
 
 function printSplit() {
